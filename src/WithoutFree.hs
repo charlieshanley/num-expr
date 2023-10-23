@@ -3,6 +3,13 @@
 {-# LANGUAGE DeriveTraversable #-}
 {-# LANGUAGE LambdaCase        #-}
 
+-- TODO:
+--   - add a pretty-printer
+--   - add metadata
+--   - explore some example use-cases
+--   - explore using Functors other than Identity
+--   - maybe improve ergonomics
+
 module WithoutFree where
 
 import           Data.Functor.Identity (Identity)
