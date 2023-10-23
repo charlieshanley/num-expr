@@ -1,8 +1,10 @@
 module Main where
 
-import qualified MyLib (someFunc)
+import qualified WithFree    (someFunc)
+import qualified WithoutFree (someFunc)
 
 main :: IO ()
 main = do
   putStrLn "Hello, Haskell!"
-  MyLib.someFunc
+  WithFree.someFunc
+  WithoutFree.someFunc

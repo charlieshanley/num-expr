@@ -32,7 +32,8 @@ library
     -- Import common warning flags.
     import:           warnings
 
-    exposed-modules:  MyLib
+    exposed-modules:  WithFree
+                    , WithoutFree
 
     -- Modules included in this library but not exported.
     -- other-modules:
@@ -42,6 +43,7 @@ library
 
     -- Other library packages from which modules are imported.
     build-depends:    base
+                    , ad
                     , free-functors
 
     -- Directories containing source files.
