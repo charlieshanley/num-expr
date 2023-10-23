@@ -41,7 +41,8 @@ library
     -- other-extensions:
 
     -- Other library packages from which modules are imported.
-    build-depends:    base ^>=4.16.4.0
+    build-depends:    base
+                    , free-functors
 
     -- Directories containing source files.
     hs-source-dirs:   src
@@ -63,9 +64,8 @@ executable num-expr
     -- other-extensions:
 
     -- Other library packages from which modules are imported.
-    build-depends:
-        base ^>=4.16.4.0,
-        num-expr
+    build-depends:    base
+                    , num-expr
 
     -- Directories containing source files.
     hs-source-dirs:   app
@@ -96,6 +96,5 @@ test-suite num-expr-test
     main-is:          Main.hs
 
     -- Test dependencies.
-    build-depends:
-        base ^>=4.16.4.0,
-        num-expr
+    build-depends:    base
+                    , num-expr

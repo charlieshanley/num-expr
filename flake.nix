@@ -13,7 +13,10 @@
       {
         devShell = pkgs.mkShell {
           nativeBuildInputs = [
-            pkgs.cabal-install pkgs.cabal2nix haskellPackages.ghc pkgs.ghcid
+            pkgs.cabal-install pkgs.cabal2nix pkgs.ghcid
+            # NB: free-functors requires the version of base to be not newer than
+            # the one that ships with this GHC
+            pkgs.haskell.compiler.ghc90
             haskellPackages.hlint pkgs.stylish-haskell
           ];
         };
