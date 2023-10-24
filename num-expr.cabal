@@ -45,6 +45,7 @@ library
     build-depends:    base
                     , ad
                     , free-functors
+                    , prettyprinter
 
     -- Directories containing source files.
     hs-source-dirs:   src

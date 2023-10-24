@@ -12,23 +12,22 @@
 
 module WithoutFree where
 
-import           Data.Functor.Identity (Identity)
-import qualified Numeric.AD            as AD
+-- import           Data.Functor.Identity (Identity)
+import qualified Numeric.AD    as AD
+import           Prettyprinter
 
-data Expr' a
+data Expr a
     = Pure a
-    | Add (Expr' a) (Expr' a)
-    | Subtr (Expr' a) (Expr' a)
-    | Mult (Expr' a) (Expr' a)
-    | Negate (Expr' a)
-    | Abs (Expr' a)
-    | Signum (Expr' a)
+    | Add (Expr a) (Expr a)
+    | Subtr (Expr a) (Expr a)
+    | Mult (Expr a) (Expr a)
+    | Negate (Expr a)
+    | Abs (Expr a)
+    | Signum (Expr a)
     | FromInteger Integer
     deriving (Show, Functor, Foldable, Traversable)
 
-type Expr f a = Expr' (f a)
-
-instance Num (Expr' a) where
+instance Num (Expr a) where
     (+) = Add
     (-) = Subtr
     (*) = Mult
@@ -37,7 +36,18 @@ instance Num (Expr' a) where
     signum = Signum
     fromInteger = FromInteger
 
-eval :: Num a => Expr' a -> a
+instance Pretty a => Pretty (Expr a) where
+    pretty = \case
+        Pure a        -> pretty a
+        Add a b       -> nest 2 (vsep [pretty "+", pretty a, pretty b])
+        Subtr a b     -> nest 2 (vsep [pretty "-", pretty a, pretty b])
+        Mult a b      -> nest 2 (vsep [pretty "*", pretty a, pretty b])
+        Negate a      -> pretty "negate" <+> pretty a
+        Abs a         -> pretty "abs" <+> pretty a
+        Signum a      -> pretty "signum" <+> pretty a
+        FromInteger i -> pretty i
+
+eval :: Num a => Expr a -> a
 eval = \case
     Pure a        -> a
     Add a b       -> eval a + eval b
@@ -49,7 +59,7 @@ eval = \case
     FromInteger i -> fromInteger i
 
 
-tax :: Expr Identity Double
+tax :: Expr Double
 tax = incomeTax + capitalGainsTax
   where
     incomeTax = income * incomeTaxRate

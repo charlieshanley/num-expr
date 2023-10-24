@@ -1,9 +1,14 @@
+{-# LANGUAGE FlexibleInstances    #-}
+{-# LANGUAGE TypeSynonymInstances #-}
+{-# OPTIONS_GHC -fno-warn-orphans #-}
+
 module WithFree (someFunc) where
 
 import           Data.Functor.Free (Free)
 import qualified Data.Functor.Free as Free
 -- import           Data.Functor.Identity (Identity (..))
 import qualified Numeric.AD        as AD
+import           Prettyprinter
 
 type Expr = Free Num
 
@@ -22,6 +27,9 @@ tax = incomeTax + capitalGainsTax
     netCapitalGains = max 0 <$> capitalGains - capitalLosses
     capitalLosses = pure 200
     capitalGains = pure 400
+
+instance Pretty a => Pretty (Expr a) where
+    pretty = undefined
 
 someFunc :: IO ()
 someFunc = do
