@@ -46,6 +46,7 @@ library
                     , ad
                     , free-functors
                     , prettyprinter
+                    , text
 
     -- Directories containing source files.
     hs-source-dirs:   src
