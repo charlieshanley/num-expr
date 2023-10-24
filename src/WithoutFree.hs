@@ -39,9 +39,9 @@ instance Num (Expr a) where
 instance Pretty a => Pretty (Expr a) where
     pretty = \case
         Pure a        -> pretty a
-        Add a b       -> nest 2 (vsep [pretty "+", pretty a, pretty b])
-        Subtr a b     -> nest 2 (vsep [pretty "-", pretty a, pretty b])
-        Mult a b      -> nest 2 (vsep [pretty "*", pretty a, pretty b])
+        Add a b       -> align $ vsep [lparen <+> pretty a, pretty "+" <+> pretty b, rparen]
+        Subtr a b     -> align $ vsep [lparen <+> pretty a, pretty "-" <+> pretty b, rparen]
+        Mult a b      -> align $ vsep [lparen <+> pretty a, pretty "*" <+> pretty b, rparen]
         Negate a      -> pretty "negate" <+> pretty a
         Abs a         -> pretty "abs" <+> pretty a
         Signum a      -> pretty "signum" <+> pretty a
